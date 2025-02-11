@@ -1,0 +1,103 @@
+/** #731DD8 purple #48A9A6 blue #E4DFDA beige #D4B483 brown #C1666B red
+*/
+:root {
+  font-family: 'Arsenal SC';
+  background-color: #48A9A6;
+  color: #E4DFDA;
+  max-width: 1500px;
+  margin: auto;
+}
+
+.nav {
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* width: 75%; */
+  background-color: #E4DFDA;
+  padding: 10px 35px;
+  color: #731DD8;
+}
+
+.nav > a {
+  cursor: pointer;
+  font-size: 1.5rem;
+  text-decoration: none;
+  color: #731DD8;
+}
+
+.nav > a:hover {
+  font-weight: 700;
+}
+
+.tracker--totalspend {
+  border: dotted #E4DFDA; 2px;
+  max-width: 150px;
+  padding: 10px;
+  text-align: center;
+  margin: auto;
+}
+
+.addexpense--container, .history, .admin, .home {
+  background-color: #731DD8;
+  padding-top: 10px;
+  padding-bottom: 50px;
+  margin-top: 0px;
+}
+
+.subsection--heading {
+  font-size: 2rem;
+  padding: 15px 0;
+  padding-bottom: 25px;
+  margin: 0;
+}
+
+.addexpense--dropdown {
+  margin: 0 10px;
+}
+
+.addexpense--dropdown, .addexpense--btn {
+  width: 200px;
+  padding: 5px;
+  font-family: 'Arsenal SC';
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.addexpense--btn {
+  background-color: #48A9A6;
+  color: #E4DFDA;
+  font-weight: 700;
+  border: solid #E4DFDA 1px;
+  cursor: pointer;
+  padding: 5px 10px;
+  align-self: center;
+  margin-top: 20px;
+}
+
+.addexpense--label {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.addexpense--textbox {
+  margin: 0 10px;
+  font-family: 'Arsenal SC';
+  font-size: 1.5rem;
+
+}
+
+.addexpense--form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  max-width: max-content;
+  /* border: solid black 1px; */
+  margin: auto;
+  gap: 25px;
+}
+
+.heading {
+  font-size: 3rem;
+}
