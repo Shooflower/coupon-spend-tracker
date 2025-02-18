@@ -1,4 +1,4 @@
-import { MouseEvent, ChangeEvent, useState, useEffect } from "react"
+import { MouseEvent, ChangeEvent, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import CurrencyInput from "./CurrencyInput"
 import { ExpenseEntry } from "../types/types"
