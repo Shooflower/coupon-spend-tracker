@@ -1,8 +1,9 @@
-export type FormAttributes = {
+export type ExpenseEntry = {
     expenseType?: string,
     store?: string,
-    amount?: number,
+    amount: number,
     displayAmount?: string,
-    tax?: number
+    tax: number,
     displayTax?: string,
+    purchaseDate: string
 }

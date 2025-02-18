@@ -1,12 +1,16 @@
 
-import {Link} from "react-router-dom"
+import {NavLink} from "react-router-dom"
 export default function Nav() {
+    const styles = {
+        fontWeight: "bold"
+    }
+
     return (
         <nav className="nav">
-            <Link to="/">Home</Link>
-            <Link to="/addexpense">Add Expense</Link>
-            <Link to="/history">View Spend History</Link>
-            <Link to="/admin">Admin</Link>
+            <NavLink to="/"  style={({isActive}) => isActive ? styles : null}>Home</NavLink>
+            <NavLink to="/addexpense"  style={({isActive}) => isActive ? styles : null}>Add Expense</NavLink>
+            <NavLink to="/history"  style={({isActive}) => isActive ? styles : null}>View Spend History</NavLink>
+            <NavLink to="/admin"  style={({isActive}) => isActive ? styles : null}>Admin</NavLink>
         </nav>
     )
 }

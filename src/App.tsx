@@ -5,6 +5,7 @@ import Layout from "./components/Layout.tsx"
 import AddExpense from './components/AddExpense.tsx'
 import History from './components/History.tsx'
 import Admin from './components/Admin.tsx'
+import SubmitExpense from './components/SubmitExpense.tsx'
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
             <Route path="addexpense" element={<AddExpense />} />
             <Route path="history" element={<History />} />
             <Route path="admin" element={<Admin />} />
+            <Route path="submitexpense" element={<SubmitExpense />} />
           </Route>
         </Routes>
       </BrowserRouter>

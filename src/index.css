@@ -31,14 +31,32 @@
 }
 
 .tracker--totalspend {
-  border: dotted #E4DFDA; 2px;
-  max-width: 150px;
+  border: dotted #48A9A6 3px;
+  max-width: 200px;
   padding: 10px;
   text-align: center;
-  margin: auto;
+  font-size: 1.5em;
+  color: #48A9A6;
+  background-color: #E4DFDA;
+  font-weight: bold;
 }
 
-.addexpense--container, .history, .admin, .home {
+.tracker--final {
+  border: dotted #E4DFDA 3px;
+  font-size: 2.5em;
+  max-width: fit-content;
+  margin: 30px auto;
+  background-color: #48A9A6;
+  color: #E4DFDA;
+}
+
+.home--spendamounts {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.addexpense--container, .history, .admin, .home, .submitexpense {
   background-color: #731DD8;
   padding-top: 10px;
   padding-bottom: 50px;
@@ -51,12 +69,64 @@
   padding-bottom: 25px;
   margin: 0;
 }
+.expenses-container {
+  justify-items: center
+}
+
+.expense {
+  display: flex;
+  justify-content: left;
+  gap: 20px;
+  font-size: 1.2em;
+  background-color: #48A9A6;
+  border: solid #E4DFDA 1px;
+  font-weight: 500;
+  margin-bottom: 5px;
+  padding: 5px 10px;
+}
+
+.expense:hover {
+  cursor: pointer;
+  background-color: #E4DFDA;
+  color: #48A9A6;
+}
+
+.expense > p {
+  text-align: left;
+  margin: 0;
+  min-width: 120px;
+}
+
+.expense-header {
+  font-weight: bold;
+  border: none;
+  background-color: transparent;
+}
+
+.expense-header:hover {
+  cursor: default;
+  background-color: transparent;
+  color: #E4DFDA;
+}
+
+.expense-totals {
+  font-weight: bold;
+  border: none;
+  background-color: #E4DFDA;
+  color: #731DD8;
+}
+
+.expense-totals:hover {
+  cursor: default;
+  background-color: #E4DFDA;
+  color: #731DD8;;
+}
 
 .addexpense--dropdown {
   margin: 0 10px;
 }
 
-.addexpense--dropdown, .addexpense--btn {
+.addexpense--dropdown, .expense--btn {
   width: 200px;
   padding: 5px;
   font-family: 'Arsenal SC';
@@ -64,7 +134,7 @@
   text-align: center;
 }
 
-.addexpense--btn {
+.expense--btn {
   background-color: #48A9A6;
   color: #E4DFDA;
   font-weight: 700;

@@ -1,45 +1,80 @@
-import { MouseEvent, ChangeEvent, useState } from "react"
+import { MouseEvent, ChangeEvent, useState, useEffect } from "react"
+import { useNavigate } from "react-router-dom"
 import CurrencyInput from "./CurrencyInput"
-import { FormAttributes } from "../types/types"
+import { ExpenseEntry } from "../types/types"
 export default function AddExpense() {
 
-    const [form, setForm] = useState<FormAttributes>({
+    const [form, setForm] = useState<ExpenseEntry>({
         expenseType: "",
         store: "",
         amount: 0,
         displayAmount: "",
         tax: 0,
-        displayTax: ""
+        displayTax: "",
+        purchaseDate: formatDate((new Date()).toISOString())
     })
+
+    const navigate = useNavigate()
+
+    // Force total to 2 decimal places and then parse as a float to submit as a number
+    const total = parseFloat((form.amount + form.tax).toFixed(2))
     
     console.log(form)
 
     function handleSubmit(event:MouseEvent) {
         event.preventDefault()
+
+        
+        const formObj = {
+            ...form,
+            total: total
+        }
+        // Call API to push record to mongo
+        fetch("http://localhost:5678/addexpense", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(formObj)
+        })
+        .then(response => response.json())
+        .then(data => console.log(data))
+
+        navigate("/submitexpense")
+    }
+
+    // Takes ISO date and makes into yyyy-MM-dd
+    function formatDate(isoDateToFormat: string): string {
+        const splitVals = isoDateToFormat.split("T")
+        return splitVals[0]
     }
 
     function handleChange(event:ChangeEvent<HTMLSelectElement> | ChangeEvent<HTMLInputElement>) {
-        console.log(event.target.name, event.target.value)
+        
         const {name, value} = event.target
 
-        setForm(prevForm => ({
-            ...prevForm,
-            [name]: value
-        }))
-    }
-
-    function formatToCurrency(value:number | undefined): string {
-        if (typeof value != 'undefined') {
-            return `$${value.toFixed(2)}`
-        } else {
-            throw new Error("Provided input is undefined")
-        }
+        setForm(prevForm => {
+            return {
+                ...prevForm,
+                [name]: value
+            }
+        })
+        
     }
 
     return (
         <div className="addexpense--container">
-            <h1 className="subsection--heading">Add A New Expense</h1>
+            <h1>Add A New Expense</h1>
             <form className="addexpense--form">
+                <label className="addexpense--label">Date
+                    <input 
+                        type="date"
+                        className="addexpense--textbox"
+                        name="purchaseDate"
+                        value={form.purchaseDate}
+                        onChange={handleChange}
+                    />
+                </label>
                 <label className="addexpense--label">Expense Type
                     <select className="addexpense--dropdown" name="expenseType" value={form.expenseType} onChange={handleChange}>
                         <option value="">-- Expense Type --</option>
@@ -61,7 +96,7 @@ export default function AddExpense() {
                 </label>
                 <label className="addexpense--label">Pre-Tax Total
                     <CurrencyInput
-                        placeholder="0.00" 
+                        placeholder="$0.00" 
                         className="addexpense--textbox" 
                         type="text" 
                         name="amount" 
@@ -73,7 +108,7 @@ export default function AddExpense() {
                 </label>
                 <label className="addexpense--label">Tax Total
                     <CurrencyInput
-                        placeholder="0.00" 
+                        placeholder="$0.00" 
                         className="addexpense--textbox" 
                         type="text" 
                         name="tax" 
@@ -83,7 +118,19 @@ export default function AddExpense() {
                         setForm={setForm}
                     />
                 </label>
-                <button onClick={handleSubmit} className="addexpense--btn">Add</button>
+                <label className="addexpense--label">Total
+                    <CurrencyInput
+                        placeholder="$0.00" 
+                        className="addexpense--textbox" 
+                        type="text" 
+                        name="total" 
+                        value={total}
+                        display={`$${total.toFixed(2)}`}
+                        setForm={setForm}
+                        readOnly={true}
+                    />
+                </label>
+                <button onClick={handleSubmit} className="expense--btn">Add</button>
             </form>
         </div>
     )

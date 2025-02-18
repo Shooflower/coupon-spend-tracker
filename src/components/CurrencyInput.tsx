@@ -1,13 +1,13 @@
 import {ChangeEvent} from "react"
-import { FormAttributes } from "../types/types"
+import { ExpenseEntry } from "../types/types"
 
 export default function CurrencyInput(props:any) {
     
-    const {name, className, placeholder, display, setForm} = props
+    const {name, className, placeholder, display, setForm, readOnly} = props
 
     function handleChange(event: ChangeEvent) {
         const {name, value} = event.target as HTMLInputElement
-        
+
         // Check if last character input (last key pressed) is a number
         const lastChar = value.charAt(value.length-1)
         
@@ -26,7 +26,7 @@ export default function CurrencyInput(props:any) {
         // If formatting input to a float results in NaN or undefined, return 0
         const valueToFloat = isNaN(unFormatToCurrency(value)) || typeof value === 'undefined' ? 0 : unFormatToCurrency(value)
         if (acceptableInput) {
-            setForm((prevForm: FormAttributes) => {
+            setForm((prevForm: ExpenseEntry) => {
                 if (name === "amount"){
                     return {
                         ...prevForm,
@@ -75,6 +75,7 @@ export default function CurrencyInput(props:any) {
             onChange={handleChange}
             className={className}
             placeholder={placeholder}
+            readOnly={readOnly}
         />
     )
 }
