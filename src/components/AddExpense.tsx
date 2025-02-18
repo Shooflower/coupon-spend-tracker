@@ -2,13 +2,9 @@ import { MouseEvent, ChangeEvent, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import CurrencyInput from "./CurrencyInput"
 import { ExpenseEntry } from "../types/types"
+import { apiServer } from "../server"
+
 export default function AddExpense() {
-
-    // Test
-    // const apiServer = "http://localhost:5678"
-
-    // Prod
-    const apiServer = "https://coupon-spend-tracker-api.onrender.com"
 
     const [form, setForm] = useState<ExpenseEntry>({
         expenseType: "",

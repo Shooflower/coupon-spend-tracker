@@ -1,12 +1,8 @@
 import {useEffect, useState} from "react"
 import Expense from "./Expense"
+import {apiServer} from "../server.ts"
 
 export default function History() {
-    // Test
-    // const apiServer = "http://localhost:5678"
-
-    // Prod
-    const apiServer = "https://coupon-spend-tracker-api.onrender.com"
 
     const [expenseHistory, setExpenseHistory] = useState([])
 
@@ -20,9 +16,9 @@ export default function History() {
         <Expense
             expenseType={expense.expenseType}
             store={expense.store}
-            amount={`$${expense.amount}`}
-            tax={`$${expense.tax}`}
-            total={`$${expense.total}`}
+            amount={`$${expense.amount.toFixed(2)}`}
+            tax={`$${expense.tax.toFixed(2)}`}
+            total={`$${expense.total.toFixed(2)}`}
             purchaseDate={expense.purchaseDate}
             key={expense._id}
         />
