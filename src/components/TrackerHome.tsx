@@ -1,10 +1,16 @@
 import {useEffect, useState} from "react"
 
 export default function TrackerHome() {
+    // Test
+    // const apiServer = "http://localhost:5678"
+
+    // Prod
+    const apiServer = "https://coupon-spend-tracker-api.onrender.com"
+
     const [expenses, setExpenses] = useState([])
 
     useEffect(() => {
-        fetch("http://localhost:5678/expense")
+        fetch(`${apiServer}/expense`)
         .then(res => res.json())
         .then(data => setExpenses(data.result))
     }, [])

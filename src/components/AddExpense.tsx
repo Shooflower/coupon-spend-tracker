@@ -4,6 +4,12 @@ import CurrencyInput from "./CurrencyInput"
 import { ExpenseEntry } from "../types/types"
 export default function AddExpense() {
 
+    // Test
+    // const apiServer = "http://localhost:5678"
+
+    // Prod
+    const apiServer = "https://coupon-spend-tracker-api.onrender.com"
+
     const [form, setForm] = useState<ExpenseEntry>({
         expenseType: "",
         store: "",
@@ -30,7 +36,7 @@ export default function AddExpense() {
             total: total
         }
         // Call API to push record to mongo
-        fetch("http://localhost:5678/addexpense", {
+        fetch(`${apiServer}/addexpense`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

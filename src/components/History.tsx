@@ -2,11 +2,16 @@ import {useEffect, useState} from "react"
 import Expense from "./Expense"
 
 export default function History() {
+    // Test
+    // const apiServer = "http://localhost:5678"
+
+    // Prod
+    const apiServer = "https://coupon-spend-tracker-api.onrender.com"
 
     const [expenseHistory, setExpenseHistory] = useState([])
 
     useEffect(() => {
-        fetch("http://localhost:5678/expense")
+        fetch(`${apiServer}/expense`)
         .then(res => res.json())
         .then(data => setExpenseHistory(data.result))
     }, [])
