@@ -5,7 +5,7 @@ export default function TrackerHome() {
     // const apiServer = "http://localhost:5678"
 
     // Prod
-    const apiServer = "https://coupon-spend-tracker-api.onrender.com"
+    const apiServer = "https://coupon-spend-tracker-api.onrender.com:5678"
 
     const [expenses, setExpenses] = useState([])
 
