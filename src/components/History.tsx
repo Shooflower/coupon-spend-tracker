@@ -7,9 +7,7 @@ export default function History() {
     const [expenseHistory, setExpenseHistory] = useState([])
 
     useEffect(() => {
-        fetch(`${apiServer}/expense`)
-        .then(res => res.json())
-        .then(data => setExpenseHistory(data.result))
+        refreshHistory()
     }, [])
 
     const expenseElements = expenseHistory.map((expense:any) => (
@@ -21,6 +19,8 @@ export default function History() {
             total={`$${expense.total.toFixed(2)}`}
             purchaseDate={expense.purchaseDate}
             key={expense._id}
+            id={expense._id}
+            handleDelete={handleDelete}
         />
     
     ))
@@ -35,6 +35,31 @@ export default function History() {
         totalTax+= exp.tax
         totalsCombined+= exp.total
     })
+
+    function refreshHistory() {
+        fetch(`${apiServer}/expense`)
+        .then(res => res.json())
+        .then(data => setExpenseHistory(data.result))
+    }
+
+    function handleDelete(id:string) {
+        // TODO: Are you sure button
+        console.log("Deleting expense...", id)
+        fetch(`${apiServer}/expense/${id}`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+        .then(response => {
+            if(response.status === 200){
+                refreshHistory()
+            }
+            return response.json()
+        })
+        .then(result => console.log(result))
+        .catch(error => console.log(error))
+    }
 
     return (
         <div className="history">
@@ -54,9 +79,9 @@ export default function History() {
                     totals={true}
                     expenseType={"Totals"}
                     store={""}
-                    amount={`$${totalAmounts}`}
-                    tax={`$${totalTax}`}
-                    total={`$${totalsCombined}`}
+                    amount={`$${totalAmounts.toFixed(2)}`}
+                    tax={`$${totalTax.toFixed(2)}`}
+                    total={`$${totalsCombined.toFixed(2)}`}
                     purchaseDate={""}
                 />
             </div>

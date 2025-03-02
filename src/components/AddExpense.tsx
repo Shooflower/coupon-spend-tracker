@@ -20,8 +20,6 @@ export default function AddExpense() {
 
     // Force total to 2 decimal places and then parse as a float to submit as a number
     const total = parseFloat((form.amount + form.tax).toFixed(2))
-    
-    console.log(form)
 
     function handleSubmit(event:MouseEvent) {
         event.preventDefault()
@@ -39,10 +37,20 @@ export default function AddExpense() {
             },
             body: JSON.stringify(formObj)
         })
-        .then(response => response.json())
+        .then(response => {
+            if(response.status === 200) {
+                navigate("/submitexpense")
+            } else {
+                navigate("/error")
+            }
+            return response.json()
+        })
         .then(data => console.log(data))
+        .catch(error => {
+            console.error(error)
+            navigate("/error")
+        })
 
-        navigate("/submitexpense")
     }
 
     // Takes ISO date and makes into yyyy-MM-dd
