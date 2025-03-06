@@ -26,10 +26,10 @@ export default function TrackerHome() {
         <div className="home">
             <h2 className="subsection--heading">Total Spend</h2>
             <div className="home--spendamounts">
-                <div className="tracker--totalspend">Subtotal: ${totalAmounts}</div>
-                <div className="tracker--totalspend">Tax: ${totalTax}</div>
+                <div className="tracker--totalspend">Subtotal: ${totalAmounts.toFixed(2)}</div>
+                <div className="tracker--totalspend">Tax: ${totalTax.toFixed(2)}</div>
             </div>
-            <div className="tracker--totalspend tracker--final">Total: ${totalsCombined}</div>
+            <div className="tracker--totalspend tracker--final">Total: ${totalsCombined.toFixed(2)}</div>
         </div>
     )
 }
