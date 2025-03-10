@@ -1,8 +1,15 @@
 import {useEffect, useState} from "react"
+import {useSearchParams} from "react-router-dom"
 import Expense from "./Expense"
 import {apiServer} from "../server.ts"
+import Filter from "./Filter.tsx"
+import { ExpenseResult } from "../types/types"
 
 export default function History() {
+
+    const [searchParams, setSearchParams] = useSearchParams()
+
+    const filter = searchParams.get("store")?.toLowerCase()
 
     const [expenseHistory, setExpenseHistory] = useState([])
 
@@ -10,7 +17,9 @@ export default function History() {
         refreshHistory()
     }, [])
 
-    const expenseElements = expenseHistory.map((expense:any) => (
+    const filteredExpenseHistory = filter ? expenseHistory.filter((expense:ExpenseResult) => expense.store?.toLowerCase() === filter) : expenseHistory
+
+    const expenseElements = filteredExpenseHistory.map((expense:ExpenseResult) => (
         <Expense
             expenseType={expense.expenseType}
             store={expense.store}
@@ -25,12 +34,13 @@ export default function History() {
     
     ))
 
+
     // Get Totals
     let totalAmounts = 0
     let totalTax = 0
     let totalsCombined = 0
 
-    expenseHistory.forEach((exp:any) => {
+    filteredExpenseHistory.forEach((exp:any) => {
         totalAmounts+= exp.amount
         totalTax+= exp.tax
         totalsCombined+= exp.total
@@ -60,10 +70,19 @@ export default function History() {
         .then(result => console.log(result))
         .catch(error => console.log(error))
     }
+    
+    function handleFilter(filterType:string, filterValue:string) {
+        if(filterValue === null) {
+            setSearchParams({})
+        } else {
+            setSearchParams({[filterType]: filterValue.toLowerCase()})
+        }
+    }
 
     return (
         <div className="history">
             <h2 className="subsection--heading">History</h2>
+            <Filter handleFilter={handleFilter} />
             <div className="expenses-container">
                 <Expense
                     header={true}
