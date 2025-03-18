@@ -32,7 +32,8 @@
 
 .tracker--totalspend {
   border: dotted #48A9A6 3px;
-  max-width: 200px;
+  width: 300px;
+  max-width: 300px;
   padding: 10px;
   text-align: center;
   font-size: 1.5em;
@@ -52,8 +53,10 @@
 
 .home--spendamounts {
   display: flex;
+  flex-direction: column;
   gap: 10px;
   justify-content: center;
+  align-items: center;
 }
 
 .addexpense--container, .history, .admin, .home, .submitexpense, .error {
@@ -83,6 +86,34 @@
   font-weight: 500;
   margin-bottom: 5px;
   padding: 5px 10px;
+  max-width: fit-content;
+  flex-wrap: wrap;
+}
+
+@media screen and (max-width: 500px){
+  /* .expenses-container {
+      flex-wrap: wrap;
+      max-width: fit-content;
+  } */
+
+  .expense {
+    max-width: fit-content;
+    flex-wrap: wrap;
+  }
+
+  .tracker--totalspend {
+    width: fit-content;
+  }
+
+  .filter {
+    max-width: max-content;
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+
+  .nav > a {
+    font-size: 1rem;
+  }
 }
 
 .expense:hover {
@@ -194,4 +225,5 @@
   justify-content: center;
   gap: 20px;
   margin-bottom: 25px;
+  flex-wrap: wrap;
 }
