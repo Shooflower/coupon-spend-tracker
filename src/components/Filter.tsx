@@ -1,4 +1,5 @@
 import {useEffect, useState} from "react"
+import { useSearchParams } from "react-router-dom"
 import { apiServer } from "../server"
 import cvs from "../assets/cvs.svg"
 import walgreens from "../assets/walgreens.png"
@@ -6,6 +7,7 @@ import walmart from "../assets/walmart.jpg"
 import publix from "../assets/publix.jpg"
 import winndixie from "../assets/winn-dixie.png"
 import target from "../assets/target.jpg"
+import misc from "../assets/pencil.png"
 
 export default function Filter(props: any) {
     const {handleFilter} = props
@@ -19,7 +21,11 @@ export default function Filter(props: any) {
         .then(data => setFilters(data.result))
     }, [])
 
-    const filterButtons = filters.map((filterOption:string) => {
+    const [searchParams, setSearchParams] = useSearchParams()
+    const storeQuery = searchParams.get("store")
+    const activeFilters = storeQuery ? filters.filter(f => f.toLowerCase() === storeQuery) : filters
+
+    const filterButtons = activeFilters.map((filterOption:string) => {
         let image = ""
         switch(filterOption.toLowerCase()) {
             case "cvs":
@@ -48,7 +54,7 @@ export default function Filter(props: any) {
     return (
         <div className="filter">
             {filterButtons}
-            <button onClick={() => handleFilter("store", null)}>Clear Filter</button>
+            <button onClick={() => handleFilter("store", null)} className="filter--clear">Clear Filter</button>
         </div>
     )
 }

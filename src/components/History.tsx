@@ -13,6 +13,8 @@ export default function History() {
 
     const [expenseHistory, setExpenseHistory] = useState([])
 
+    const [editing, setEditing] = useState(false)
+
     useEffect(() => {
         refreshHistory()
     }, [])
@@ -30,6 +32,7 @@ export default function History() {
             key={expense._id}
             id={expense._id}
             handleDelete={handleDelete}
+            handleEdit={handleEdit}
         />
     
     ))
@@ -50,6 +53,10 @@ export default function History() {
         fetch(`${apiServer}/expense`)
         .then(res => res.json())
         .then(data => setExpenseHistory(data.result))
+    }
+
+    function handleEdit(id:string) {
+        setEditing(true)
     }
 
     function handleDelete(id:string) {
@@ -81,8 +88,10 @@ export default function History() {
 
     return (
         <div className="history">
-            <h2 className="subsection--heading">History</h2>
-            <Filter handleFilter={handleFilter} />
+            {editing && <button onClick={() => setEditing(false)} className="history--back">Back to History</button>}
+            <h2 className="subsection--heading">{editing ? "Edit Expense" : "History"}</h2>
+            {!editing && <Filter handleFilter={handleFilter} />}
+            {!editing && 
             <div className="expenses-container">
                 <Expense
                     header={true}
@@ -104,6 +113,8 @@ export default function History() {
                     purchaseDate={""}
                 />
             </div>
+            }
+            {editing && <h1>Editing Expense</h1>}
         </div>
     )
 }

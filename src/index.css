@@ -2,7 +2,7 @@
 */
 :root {
   font-family: 'Arsenal SC';
-  background-color: #48A9A6;
+  background-color: #48a9a635;
   color: #E4DFDA;
   max-width: 1500px;
   margin: auto;
@@ -16,14 +16,14 @@
   /* width: 75%; */
   background-color: #E4DFDA;
   padding: 10px 35px;
-  color: #731DD8;
+  color: black;
 }
 
 .nav > a {
   cursor: pointer;
   font-size: 1.5rem;
   text-decoration: none;
-  color: #731DD8;
+  color: black;
 }
 
 .nav > a:hover {
@@ -38,7 +38,7 @@
   text-align: center;
   font-size: 1.5em;
   color: #48A9A6;
-  background-color: #E4DFDA;
+  background-color: white;
   font-weight: bold;
 }
 
@@ -60,7 +60,7 @@
 }
 
 .addexpense--container, .history, .admin, .home, .submitexpense, .error {
-  background-color: #731DD8;
+  background-color: #48A9A6;
   padding-top: 10px;
   padding-bottom: 50px;
   margin-top: 0px;
@@ -119,7 +119,7 @@
 .expense:hover {
   cursor: pointer;
   background-color: #E4DFDA;
-  color: #48A9A6;
+  color: black;
 }
 
 .expense > p {
@@ -144,13 +144,13 @@
   font-weight: bold;
   border: none;
   background-color: #E4DFDA;
-  color: #731DD8;
+  color: black;
 }
 
 .expense-totals:hover {
   cursor: default;
   background-color: #E4DFDA;
-  color: #731DD8;;
+  color: black;;
 }
 
 .addexpense--dropdown {
@@ -166,10 +166,11 @@
 }
 
 .expense--btn {
-  background-color: #48A9A6;
-  color: #E4DFDA;
+  color: black;
+  background-color: white;
   font-weight: 700;
-  border: solid #E4DFDA 1px;
+  border: solid black 1px;
+  border-radius: 5px;
   cursor: pointer;
   padding: 5px 10px;
   align-self: center;
@@ -201,6 +202,14 @@
 
 .heading {
   font-size: 3rem;
+  color: #48A9A6;
+  
+}
+
+.layout {
+  border: solid #48A9A6 1px;
+  border-radius: 10px;
+  background-color: white;
 }
 
 .expense--icon {
@@ -212,11 +221,14 @@
 }
 
 .filter--img {
-  /* width: 3em; */
   height: 2em;
   cursor: pointer;
-  /* margin: 10px; */
-  border: solid #D4B483 1px;
+  border: solid #48A9A6 1px;
+  border-radius: 5px;
+}
+
+.filter--img:hover {
+  border: solid black 1px;
 }
 
 .filter {
@@ -226,4 +238,15 @@
   gap: 20px;
   margin-bottom: 25px;
   flex-wrap: wrap;
+}
+
+.filter--clear, .history--back {
+  background-color: white;
+  color: black;
+  border: solid black 1px;
+  font-family: 'Arsenal SC';
+  font-weight: 700;
+  letter-spacing: .05em;
+  border-radius: 5px;
+  padding: 5px;
 }
