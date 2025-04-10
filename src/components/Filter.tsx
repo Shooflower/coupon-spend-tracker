@@ -7,7 +7,6 @@ import walmart from "../assets/walmart.jpg"
 import publix from "../assets/publix.jpg"
 import winndixie from "../assets/winn-dixie.png"
 import target from "../assets/target.jpg"
-import misc from "../assets/pencil.png"
 
 export default function Filter(props: any) {
     const {handleFilter} = props
@@ -21,7 +20,7 @@ export default function Filter(props: any) {
         .then(data => setFilters(data.result))
     }, [])
 
-    const [searchParams, setSearchParams] = useSearchParams()
+    const [searchParams] = useSearchParams()
     const storeQuery = searchParams.get("store")
     const activeFilters = storeQuery ? filters.filter(f => f.toLowerCase() === storeQuery) : filters
 

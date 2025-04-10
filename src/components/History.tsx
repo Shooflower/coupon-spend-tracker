@@ -56,6 +56,7 @@ export default function History() {
     }
 
     function handleEdit(id:string) {
+        console.log(id)
         setEditing(true)
     }
 

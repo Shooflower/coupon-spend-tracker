@@ -4,7 +4,7 @@ import CurrencyInput from "./CurrencyInput"
 import { ExpenseEntry } from "../types/types"
 import { apiServer } from "../server"
 
-export default function EditExpense(props:ExpenseEntry) {
+export default function EditExpense() {
 
     const [form, setForm] = useState<ExpenseEntry>({
         expenseType: "",
@@ -30,8 +30,8 @@ export default function EditExpense(props:ExpenseEntry) {
             total: total
         }
         // Call API to push record to mongo
-        fetch(`${apiServer}/addexpense`, {
-            method: "POST",
+        fetch(`${apiServer}/expenses`, {
+            method: "PUT",
             headers: {
                 "Content-Type": "application/json"
             },
