@@ -21,6 +21,7 @@ function App() {
             <Route path="admin" element={<Admin />} />
             <Route path="submitexpense" element={<SubmitExpense />} />
             <Route path="error" element={<Error />} />
+            <Route path="*" element={<Error />} />
           </Route>
         </Routes>
       </BrowserRouter>

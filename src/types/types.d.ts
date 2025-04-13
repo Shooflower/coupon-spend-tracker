@@ -5,7 +5,8 @@ export type ExpenseEntry = {
     displayAmount?: string,
     tax: number,
     displayTax?: string,
-    purchaseDate: string
+    purchaseDate: string,
+    id?: string
 }
 
 export type ExpenseResult = {

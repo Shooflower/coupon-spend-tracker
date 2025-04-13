@@ -4,6 +4,7 @@ import Expense from "./Expense"
 import {apiServer} from "../server.ts"
 import Filter from "./Filter.tsx"
 import { ExpenseResult } from "../types/types"
+import EditExpense from "./EditExpense.tsx"
 
 export default function History() {
 
@@ -14,6 +15,8 @@ export default function History() {
     const [expenseHistory, setExpenseHistory] = useState([])
 
     const [editing, setEditing] = useState(false)
+
+    const [editedExpense, setEditedExpense] = useState<ExpenseResult | Partial<ExpenseResult>>({})
 
     useEffect(() => {
         refreshHistory()
@@ -56,8 +59,17 @@ export default function History() {
     }
 
     function handleEdit(id:string) {
-        console.log(id)
-        setEditing(true)
+        // Retrieve properties from this expense
+        const expense = expenseHistory?.find((e:ExpenseResult) => e._id === id)
+        
+        // Pass on the props of the expense to Edit Expense
+        console.log("expense", expense)
+        if(expense != null) {
+            setEditedExpense(expense)
+            setEditing(true)
+        } else {
+            throw new Error(`Could not find expense with id: ${id}`)
+        }
     }
 
     function handleDelete(id:string) {
@@ -89,7 +101,7 @@ export default function History() {
 
     return (
         <div className="history">
-            {editing && <button onClick={() => setEditing(false)} className="history--back">Back to History</button>}
+            {editing && <button onClick={() => setEditing(false)} className="history--back">&larr; Back to History</button>}
             <h2 className="subsection--heading">{editing ? "Edit Expense" : "History"}</h2>
             {!editing && <Filter handleFilter={handleFilter} />}
             {!editing && 
@@ -115,7 +127,7 @@ export default function History() {
                 />
             </div>
             }
-            {editing && <h1>Editing Expense</h1>}
+            {editing && <EditExpense expense={editedExpense} setEditing={setEditing} />}
         </div>
     )
 }
