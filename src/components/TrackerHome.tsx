@@ -6,7 +6,7 @@ export default function TrackerHome() {
     const [expenses, setExpenses] = useState([])
 
     useEffect(() => {
-        fetch(`${apiServer}/expense`)
+        fetch(`${apiServer}/expenses`)
         .then(res => res.json())
         .then(data => setExpenses(data.result))
     }, [])

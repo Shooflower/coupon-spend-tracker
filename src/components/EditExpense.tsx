@@ -1,9 +1,12 @@
 import { MouseEvent, ChangeEvent, useState } from "react"
 import CurrencyInput from "./CurrencyInput"
 import { ExpenseEntry, ExpenseResult } from "../types/types"
+import { apiServer } from "../server"
+import { useNavigate } from "react-router-dom"
 
 export default function EditExpense(props:{expense: ExpenseResult | Partial<ExpenseResult>, setEditing:any}) {
     const {expense, setEditing} = props
+    const navigate = useNavigate()
 
     const [form, setForm] = useState<ExpenseEntry>({
         expenseType: expense.expenseType,
@@ -22,31 +25,31 @@ export default function EditExpense(props:{expense: ExpenseResult | Partial<Expe
         event.preventDefault()
 
         
-        // const formObj = {
-        //     ...form,
-        //     total: total
-        // }
+        const formObj = {
+            ...form,
+            total: total
+        }
         // Call API to push record to mongo
-        // fetch(`${apiServer}/expenses`, {
-        //     method: "PUT",
-        //     headers: {
-        //         "Content-Type": "application/json"
-        //     },
-        //     body: JSON.stringify(formObj)
-        // })
-        // .then(response => {
-        //     if(response.status === 200) {
-        //         navigate("/submitexpense")
-        //     } else {
-        //         navigate("/error")
-        //     }
-        //     return response.json()
-        // })
-        // .then(data => console.log(data))
-        // .catch(error => {
-        //     console.error(error)
-        //     navigate("/error")
-        // })
+        fetch(`${apiServer}/expenses/${expense._id}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(formObj)
+        })
+        .then(response => {
+            if(response.status === 200) {
+                navigate("/updateexpense")
+            } else {
+                navigate("/error")
+            }
+            return response.json()
+        })
+        .then(data => console.log(data))
+        .catch(error => {
+            console.error(error)
+            navigate("/error")
+        })
 
     }
 

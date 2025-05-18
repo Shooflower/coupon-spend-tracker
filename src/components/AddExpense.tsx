@@ -13,7 +13,7 @@ export default function AddExpense() {
         displayAmount: "",
         tax: 0,
         displayTax: "",
-        purchaseDate: formatDate((new Date()).toISOString())
+        purchaseDate: formatDate((new Date()).toLocaleDateString())
     })
 
     const navigate = useNavigate()
@@ -30,7 +30,7 @@ export default function AddExpense() {
             total: total
         }
         // Call API to push record to mongo
-        fetch(`${apiServer}/addexpense`, {
+        fetch(`${apiServer}/expenses`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -54,9 +54,11 @@ export default function AddExpense() {
     }
 
     // Takes ISO date and makes into yyyy-MM-dd
-    function formatDate(isoDateToFormat: string): string {
-        const splitVals = isoDateToFormat.split("T")
-        return splitVals[0]
+    function formatDate(date: string): string {
+        const splitVals = date.split("/")
+        
+        // Added pad start to the month so that single digit months would conform to date yyyy-MM-dd
+        return `${splitVals[2]}-${splitVals[0].padStart(2, "0")}-${splitVals[1]}`
     }
 
     function handleChange(event:ChangeEvent<HTMLSelectElement> | ChangeEvent<HTMLInputElement>) {

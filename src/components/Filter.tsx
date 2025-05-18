@@ -15,7 +15,7 @@ export default function Filter(props: any) {
 
     // Fetch call to retrieve the list of stores
     useEffect(() => {
-        fetch(`${apiServer}/store`)
+        fetch(`${apiServer}/stores`)
         .then(response => response.json())
         .then(data => setFilters(data.result))
     }, [])

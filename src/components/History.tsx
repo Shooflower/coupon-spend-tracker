@@ -53,7 +53,7 @@ export default function History() {
     })
 
     function refreshHistory() {
-        fetch(`${apiServer}/expense`)
+        fetch(`${apiServer}/expenses`)
         .then(res => res.json())
         .then(data => setExpenseHistory(data.result))
     }
@@ -75,7 +75,7 @@ export default function History() {
     function handleDelete(id:string) {
         // TODO: Are you sure button
         console.log("Deleting expense...", id)
-        fetch(`${apiServer}/expense/${id}`, {
+        fetch(`${apiServer}/expenses/${id}`, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json"

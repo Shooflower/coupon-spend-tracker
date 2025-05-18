@@ -6,6 +6,7 @@ import AddExpense from './components/AddExpense.tsx'
 import History from './components/History.tsx'
 import Admin from './components/Admin.tsx'
 import SubmitExpense from './components/SubmitExpense.tsx'
+import SubmitEditedExpense from './components/SubmitEditedExpense.tsx'
 import Error from './components/Error.tsx'
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
             <Route path="history" element={<History />} />
             <Route path="admin" element={<Admin />} />
             <Route path="submitexpense" element={<SubmitExpense />} />
+            <Route path="updateexpense" element={<SubmitEditedExpense />} />
             <Route path="error" element={<Error />} />
             <Route path="*" element={<Error />} />
           </Route>
