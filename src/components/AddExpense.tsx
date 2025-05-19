@@ -56,7 +56,7 @@ export default function AddExpense() {
     // Takes ISO date and makes into yyyy-MM-dd
     function formatDate(date: string): string {
         const splitVals = date.split("/")
-        
+
         // Added pad start to the month so that single digit months would conform to date yyyy-MM-dd
         return `${splitVals[2]}-${splitVals[0].padStart(2, "0")}-${splitVals[1]}`
     }
@@ -100,10 +100,13 @@ export default function AddExpense() {
                         <select className="addexpense--dropdown" name="store" value={form.store} onChange={handleChange}>
                             <option value="">-- Store --</option>
                             <option value="CVS">CVS</option>
-                            <option value="Walgreens">Walgreens</option>
+                            <option value="Dollar Tree">Dollar Tree</option>
                             <option value="Publix">Publix</option>
-                            <option value="Walmart">Walmart</option>
                             <option value="Target">Target</option>
+                            <option value="The Fresh Market">The Fresh Market</option>
+                            <option value="Walgreens">Walgreens</option>
+                            <option value="Walmart">Walmart</option>
+                            <option value="Whole Foods">Whole Foods</option>
                             <option value="Winn-Dixie">Winn-Dixie</option>
                         </select>
                     </label>

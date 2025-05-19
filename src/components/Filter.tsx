@@ -7,6 +7,10 @@ import walmart from "../assets/walmart.jpg"
 import publix from "../assets/publix.jpg"
 import winndixie from "../assets/winn-dixie.png"
 import target from "../assets/target.jpg"
+import wholefoods from "../assets/wholefoods.png"
+import thefreshmarket from "../assets/thefreshmarket.png"
+import dollartree from "../assets/dollartree.png"
+import miscellaneous from "../assets/miscellaneous.jpg"
 
 export default function Filter(props: any) {
     const {handleFilter} = props
@@ -45,6 +49,17 @@ export default function Filter(props: any) {
             case "winn-dixie":
                 image = winndixie
                 break
+            case "the fresh market":
+                image = thefreshmarket
+                break
+            case "whole foods":
+                image = wholefoods
+                break
+            case "dollar tree":
+                image = dollartree
+                break
+            default:
+                image = miscellaneous
         }
 
         return <img className="filter--img" src={image} key={filterOption} onClick={() => handleFilter("store", filterOption)}/>

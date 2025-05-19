@@ -22,7 +22,15 @@ export default function History() {
         refreshHistory()
     }, [])
 
-    const filteredExpenseHistory = filter ? expenseHistory.filter((expense:ExpenseResult) => expense.store?.toLowerCase() === filter) : expenseHistory
+    const filterExpenses = () => {
+        if (filter?.toLocaleLowerCase() === "miscellaneous") {
+            return expenseHistory.filter((expense:ExpenseResult) => expense.expenseType?.toLowerCase() === filter)
+        }
+        return expenseHistory.filter((expense:ExpenseResult) => expense.store?.toLowerCase() === filter)
+    }
+
+    const filteredExpenseHistory = filter ? filterExpenses() : expenseHistory
+
 
     const expenseElements = filteredExpenseHistory.map((expense:ExpenseResult) => (
         <Expense
